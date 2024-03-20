@@ -48,4 +48,51 @@ The `CatWeightEvaluator` class contains the `isHealthyWeight()` method.
 Changing the code to fit the Single Responsibility Principle ensures that the code stays independant and won't break when a module is adjusted.
 This is massively important for code flexibility and maintenance.
 
+## Open Closed Principle (OCP)
 
+### Defining the SOLID Principle
+
+The Open Closed Principle means that a a given artifact within your software needs to be *open* to be expanded upon
+and *closed* as far as modifying it is concerned. Basically, this principle denotes the idea that your software should be capable
+of extension inherently and without source code modification.
+
+### The Entity
+
+The focus of this principle is handling an inventory that holds weapon entities and armor entities.
+
+### Violations
+
+**Violating Code**
+
+In the `violated/OCP` package there is an `Inventory`, `Armor`, and `Weapon` class.
+
+The `Inventory` class contains a list of Armors and Weapons as class attributes and also the class methods:
+  - `addWeapon()`
+  - `getWeapon()`
+  - `addArmor()`
+  - `getArmor()`
+
+The 'Weapon' and 'Armor' classes are similar to one another with both being tied to a `damage (int)` or `protection (int)` attribute respectively both with getters.
+
+**The Problem**
+
+What happens if we want to define specific types of weapons and armors? Suddenly if I want to make spears, swords, shields or plate mail I run into issues with needing to change the `Armor` or `Weapon` class and it all gets very messy.
+
+### Solution
+
+**Adjustments**
+
+In the `solution/OCP` package the `Armor` and `Weapon` classes have been turned into Interfaces and I have introduced four new classes.
+The new classes are the `Sword`, `Shield`, `Spear`, and `PlateMail` classes.
+
+The `Inventory` class is unchanged as it can still contain a list of `Weapon`s and `Armor` thanks to these interfaces.
+
+The `Armor` and `Weapon` interfaces contain only the `getProtection()` and `getDamage()` empty methods now respectfully.
+
+The `Sword`, `Shield`, `Spear`, and `PlateMail` classes extend their respective interfaces and contain their individual class attributes.
+
+**Why**
+
+The addition of new weapons and armors are as simple as making new classes that extend the interfaces now. This opens up
+a ton of potential for expandability and it means the source code really doesn't have to be modified at all. Having these interfaces
+also means that the code is much more robust and less error-prone.
