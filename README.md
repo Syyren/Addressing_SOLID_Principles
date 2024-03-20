@@ -96,3 +96,54 @@ The `Sword`, `Shield`, `Spear`, and `PlateMail` classes extend their respective 
 The addition of new weapons and armors are as simple as making new classes that extend the interfaces now. This opens up
 a ton of potential for expandability and it means the source code really doesn't have to be modified at all. Having these interfaces
 also means that the code is much more robust and less error-prone.
+
+## Liskov's Substitution Principle (LSP)
+
+### Defining the SOLID Principle
+
+Liskov's Substitution Principle states, in plain english, that a child class should never have an inherited method from its parent
+that it cannot implement. The reasoning for this is pretty simple, invalid data and extraneous or altered return types on inherited methods are dirty code.
+
+### The Entity
+
+The entities for this principle are a fast food restaurant and sit down restaurant class that both inherit methods from a parent restauraunt wait time class.
+
+### Violations
+
+**Violating Code**
+
+In the `violated/LSP` package the relevant classes are the `FastFoodRestaurant`, `SitDownRestaurant`, and `RestaurantWaitTime`.
+
+The `RestaurantWaitTime` class contains a series of class methods:
+  - `getDriveTime()`
+  - `getLineTime()`
+  - `tableAssignment()`
+  - `tableTime()`
+
+The 'FastFoodRestaurant' and 'SitDownRestaurant' both implement this parent class and use different methods from it. `FastFoodRestaurant` uses the `getDriveTime()` and `getLineTime()` methods, while the `SitDownRestaurant` uses the `tableAssignment()`
+and `tableTime()` methods.
+
+**The Problem**
+
+This code is messy. Despite `RestaurantWaitTime` being a parent class that does in fact work for these two restaurant types, the code is not clean and there are invalid methods being inherited by both child classes.
+
+### Solution
+
+**Adjustments**
+
+In the `solution/LSP` package the `RestaurantWaitTime` class has been broken down into two new classes: `FastFoodWaitTime` and `SitDownWaitTime`.
+On top of this, I have implemented an `IRestaurant` interface for both child classes to implement.
+
+The `FastFoodRestaurant` and `SitDownRestaurant` classes remain mostly unchanged with the exception of the addition of the interface and changing of their parent class.
+
+`FastFoodWaitTime` contains the methods:
+  - `getDriveTime()`
+  - `getLineTime()`
+
+`SitDownWaitTime` contains the methods:
+  - `tableAssignment()`
+  - `tableTime()`
+
+**Why**
+
+Clean code is extremely important. It makes debugging, reading and expanding on your code base much, much easier. Messy code and unhandled or overwritten imports can and will lead to errors and maintenance issues.
