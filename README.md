@@ -11,8 +11,8 @@ These three principles are the Single Responsibility Principle (SRP), the Open C
 
 ### Defining the SOLID Principle
 
-In essence, the Single Responsibilty Principle states that a class should have only one reason to change.
-By giving a given class more responsibilities, you're giving it more opportunities to break this SRP principle and the less independant a given class will be.
+In essence, the Single Responsibility Principle states that a class should have only one reason to change.
+By giving a given class more responsibilities, you're giving it more opportunities to break this SRP principle and the less independent a given class will be.
 
 ### The Entity
 
@@ -30,14 +30,14 @@ The `Cat` class contains all of the class attributes and also the class methods:
 
 **The Problem**
 
-By containing these methods within the Cat class we will run into coupling issues if either of these methods ever need to change or if new 
+By containing these methods within the Cat class, we will run into coupling issues if either of these methods ever need to change or if new 
 methods get implemented that interact poorly or even break with the established ones.
 
 ### Solution
 
 **Adjustments**
 
-In the `solution/SRP` package the God class has been broken down into three seperate classes.
+In the `solution/SRP` package the God class has been broken down into three separate classes.
 
 The `Cat` class now contains only attributes and it functions as a data structure.
 The `CatSizer` class contains the `calculateSize()` method.
@@ -45,14 +45,14 @@ The `CatWeightEvaluator` class contains the `isHealthyWeight()` method.
 
 **Why**
 
-Changing the code to fit the Single Responsibility Principle ensures that the code stays independant and won't break when a module is adjusted.
+Changing the code to fit the Single Responsibility Principle ensures that the code stays independent and won't break when a module is adjusted.
 This is massively important for code flexibility and maintenance.
 
 ## Open Closed Principle (OCP)
 
 ### Defining the SOLID Principle
 
-The Open Closed Principle means that a a given artifact within your software needs to be *open* to be expanded upon
+The Open Closed Principle means that a given artifact within your software needs to be *open* to be expanded upon
 and *closed* as far as modifying it is concerned. Basically, this principle denotes the idea that your software should be capable
 of extension inherently and without source code modification.
 
@@ -72,11 +72,11 @@ The `Inventory` class contains a list of Armors and Weapons as class attributes 
   - `addArmor()`
   - `getArmor()`
 
-The 'Weapon' and 'Armor' classes are similar to one another with both being tied to a `damage (int)` or `protection (int)` attribute respectively both with getters.
+The 'Weapon' and 'Armor' classes are like one another with both being tied to a `damage (int)` or `protection (int)` attribute respectively both with getters.
 
 **The Problem**
 
-What happens if we want to define specific types of weapons and armors? Suddenly if I want to make spears, swords, shields or plate mail I run into issues with needing to change the `Armor` or `Weapon` class and it all gets very messy.
+What happens if we want to define specific types of weapons and armors? Suddenly if I want to make spears, swords, shields, or plate mail I run into issues with needing to change the `Armor` or `Weapon` class and it all gets very messy.
 
 ### Solution
 
@@ -95,18 +95,18 @@ The `Sword`, `Shield`, `Spear`, and `PlateMail` classes extend their respective 
 
 The addition of new weapons and armors are as simple as making new classes that extend the interfaces now. This opens up
 a ton of potential for expandability and it means the source code really doesn't have to be modified at all. Having these interfaces
-also means that the code is much more robust and less error-prone.
+also means that the code is much more robust and less error prone.
 
 ## Liskov's Substitution Principle (LSP)
 
 ### Defining the SOLID Principle
 
-Liskov's Substitution Principle states, in plain english, that a child class should never have an inherited method from its parent
-that it cannot implement. The reasoning for this is pretty simple, invalid data and extraneous or altered return types on inherited methods are dirty code.
+Liskov's Substitution Principle states, in plain English, that a child class should never have an inherited method from its parent
+that it cannot implement. The reasoning for this is simple, invalid data and extraneous or altered return types on inherited methods are dirty code.
 
 ### The Entity
 
-The entities for this principle are a fast food restaurant and sit down restaurant class that both inherit methods from a parent restauraunt wait time class.
+The entities for this principle are a fast-food restaurant and sit down restaurant class that both inherit methods from a parent restaurant wait time class.
 
 ### Violations
 
@@ -146,4 +146,4 @@ The `FastFoodRestaurant` and `SitDownRestaurant` classes remain mostly unchanged
 
 **Why**
 
-Clean code is extremely important. It makes debugging, reading and expanding on your code base much, much easier. Messy code and unhandled or overwritten imports can and will lead to errors and maintenance issues.
+Clean code is extremely important. It makes debugging, reading, and expanding on your code base much, much easier. Messy code and unhandled or overwritten imports can and will lead to errors and maintenance issues.
